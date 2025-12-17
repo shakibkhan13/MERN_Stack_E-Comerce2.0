@@ -308,5 +308,5 @@ const options = {
 
 const specs = swaggerJSDoc(options);
 
-export { specs };
+// export { specs };
 export default specs;
