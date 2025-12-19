@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../controllers/usersControllers.js";
+import { addAddress, deleteAddress, updateAddress } from "../controllers/AddressController.js";
 
 const router = Router();  
 
@@ -12,6 +13,14 @@ router.route("/:id")
     .get(protect, getUserById)
     .put(protect, updateUser)
     .delete(protect, admin, deleteUser); 
+
+router.route("/:id/addresses")
+    .post(protect, addAddress); 
+
+router
+  .route("/:id/addresses/:addressId")
+  .put(protect, updateAddress)
+  .delete(protect, deleteAddress); 
 
 
 

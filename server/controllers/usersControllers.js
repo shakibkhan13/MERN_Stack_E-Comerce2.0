@@ -52,7 +52,6 @@ export const createUser = asyncHandler(async (req, res) => {
 
 
 // get user
-
 export const getUserById = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id).select("-password"); 
 
@@ -65,35 +64,6 @@ export const getUserById = asyncHandler(async (req, res) => {
 }); 
 
 // update users
-// export const updateUser = asyncHandler(async (req, res) => {
-//     const user = await User.findById(req.params.id);
-
-//     if (!user) {
-//         res.status(404);
-//         throw new Error("User not found");
-//     }
-
-//     user.name = req.body.name || user.name;
-
-//     if (req.body.role) {
-//         user.role = role.body.role
-//     }
-
-//     user.addresses = req.body.addresses || user.addresses;
-
-//     const updateUser = await user.save();
-
-//     res.status(200).json({
-//         _id: updateUser._id,
-//         name: updateUser.name,
-//         email: updateUser.name,
-//         avater: updateUser.avater,
-//         role: updateUser.role,
-//         addresses: updateUser.addresses,
-//     })
-
-// })
-
 export const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
@@ -124,5 +94,16 @@ export const updateUser = asyncHandler(async (req, res) => {
 });
 
 export const deleteUser = asyncHandler(async (req, res) => {
-    
+    const user = await User.findById(req.params.id); 
+
+    if (user) {
+        await user.deleteOne(); 
+        res.status(200).json({
+            status: "success",
+            message: "User deleted successfully!", 
+        }); 
+    } else {
+        res.status(404); 
+        throw new Error("User not found"); 
+    }
 })
