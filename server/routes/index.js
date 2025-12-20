@@ -11,6 +11,9 @@ import bannerRoutes from './bannerRoutes.js'
 import statsRoutes from './statsRoutes.js'; 
 import orderRoutes from './orderRoutes.js'; 
 import wishlistRoutes from './wishlistRoutes.js'; 
+import cartRoutes from './cartRoute.js'; 
+import analyticsRoutes from './analyticsRoutes.js'; 
+import paymentRoutes from './paymentRoutes.js'
 
 const router = Router();
 
@@ -23,7 +26,9 @@ router.use("/banners", bannerRoutes);
 router.use("/stats", statsRoutes); 
 router.use("/orders", orderRoutes); 
 router.use("/wishlist", wishlistRoutes); 
-
+router.use("/cart", cartRoutes); 
+router.use("/analytics", analyticsRoutes); 
+router.use("/payment", paymentRoutes);
 
 
 

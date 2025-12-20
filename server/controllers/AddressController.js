@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userSchema.js";
 
 
-// create Addresses
 export const addAddress = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
@@ -62,54 +61,6 @@ export const addAddress = asyncHandler(async (req, res) => {
     });
 }); 
 
-// update address
-// export const updateAddress = asyncHandler(async (req, res) => {
-//     const user = await User.findById(req.params.id);
-
-//     if (!user) {
-//         res.status(404);
-//         throw new Error("User not found");
-//     }
-
-//     if (user._id.toString() !== req.user._id.toString() && req.user.role !== "admin") {
-//         res.status(403);
-//         throw new Error("Not authorized to modify this user's addresses");
-//     }
-//     const address = user.addresses.id(req.params.addressId);
-
-//     if (!address) {
-//         res.status(404);
-//         throw new Error("Address not found");
-//     };
-
-//     const {
-//         street,
-//         city,
-//         country,
-//         postalCode,
-//         isDefault,
-//     } = req.body;
-
-//     if (street) address.street = street;
-//     if (city) address.city = city;
-//     if (country) address.country = country;
-//     if (postalCode) address.postalCode = postalCode;
-
-//     if (isDefault) {
-//         user.addresses.forEach((addr) => {
-//             addr.isDefault = false;
-//         });
-//         address.isDefault = true;
-//     };
-
-//     await user.save();
-
-//     res.json({
-//         success: true,
-//         addresses: user.addresses,
-//         message: "Address updated successfully",
-//     });
-// });
 
 export const updateAddress = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
@@ -119,7 +70,7 @@ export const updateAddress = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  // Authorization
+
   if (
     user._id.toString() !== req.user._id.toString() &&
     req.user.role !== "admin"
@@ -127,8 +78,7 @@ export const updateAddress = asyncHandler(async (req, res) => {
     res.status(403);
     throw new Error("Not authorized to modify this user's addresses");
   }
-
-  // ✅ FIXED: addressId now exists
+s
   const address = user.addresses.id(req.params.addressId);
 
   if (!address) {
@@ -160,7 +110,6 @@ export const updateAddress = asyncHandler(async (req, res) => {
 });
 
 
-// delete address
 export const deleteAddress = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id); 
 
