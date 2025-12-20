@@ -53,7 +53,7 @@ const productSchema = mongoose.Schema(
         },
         image: {
             type: String,
-            required: true,
+            // required: true,
         },
         category: {
             type: mongoose.Schema.Types.ObjectId,
@@ -72,13 +72,16 @@ const productSchema = mongoose.Schema(
 ); 
 
 
-productSchema.pre("save", function (next) {
-    if (this.ratings && this.ratings.length > 0) {
-        const sum = this.ratings.reduce((acc, item) => acc + item.rating, 0);
-        this.averageRating = sum / this.ratings.length;
-    };
-    next();
-}); 
+productSchema.pre("save", function () {
+  if (this.ratings && this.ratings.length > 0) {
+    const sum = this.ratings.reduce((acc, item) => acc + item.rating, 0);
+    this.averageRating = sum / this.ratings.length;
+  } else {
+    this.averageRating = 0;
+  }
+});
+
+
 
 
 const Product = mongoose.model("Product", productSchema); 

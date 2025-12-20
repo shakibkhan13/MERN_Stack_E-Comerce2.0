@@ -76,7 +76,7 @@ const orderSchema = new mongoose.Schema(
     }, 
 );
 
-const OrderSchema = mongoose.model("Order", orderSchema); 
+const Order = mongoose.model("Order", orderSchema); 
 
-export default OrderSchema; 
+export default Order; 
 
