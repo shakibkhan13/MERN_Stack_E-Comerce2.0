@@ -44,6 +44,20 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"],
 })); 
 
+app.use(express.json({ limit: "10mb" })); // base64 images supported
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+
+
+
+app.use((err, req, res, next) => {
+  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+  res.status(statusCode).json({
+    message: err.message,
+    stack: process.env.NODE_ENV === "production" ? null : err.stack,
+  });
+});
+
 app.use(express.json({ limit: "10mb" })); 
 app.use(express.urlencoded({ limit: "10mb", extended: true })); 
 
@@ -74,4 +88,8 @@ const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
     console.log(`\n Server is running at http://localhost:8000`);
+    console.log(
+      process.env.CLOUDINARY_CLOUD_NAME,
+      process.env.CLOUDINARY_API_KEY ? "Key loaded" : "Key missing"
+    );
 })
