@@ -3,6 +3,7 @@ import Banner from "@/components/Home/Banner";
 import Brands from "@/components/Home/Brand";
 import CategorySection from "@/components/Home/CategorySection";
 import ProductList from "@/components/Home/ProductList";
+import TravelSection from "@/components/Home/TravelSection";
 import { fetchData } from "@/lib/api";
 import { Brand } from "@/types/type";
 
@@ -23,6 +24,7 @@ export default async function Home() {
           <Banner />
           <ProductList />
           <Brands brands={brands} />
+          <TravelSection />
         </div>
       </Container>
     </div>
